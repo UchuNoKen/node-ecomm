@@ -1,3 +1,7 @@
+const express = require("express");
+
+const bodyParser = require("body-parser");
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -8,13 +12,14 @@ app.use("/add-product", (req, res, next) => {
   );
 });
 
-app.use("/product", (req, res, next) => {
+app.post("/product", (req, res, next) => {
   console.log(req.body);
   res.redirect("/");
 });
 
-console.log(routes.someText);
+app.use("/", (req, res, next) => {
+  res.send("<h1>Express Routing</h1>");
+});
 
-// listen keeps server looping, listening for requests
-server.listen(8000);
+app.listen(8000);
 console.log("Server running on port: 8000");
